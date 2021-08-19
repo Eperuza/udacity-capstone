@@ -1,17 +1,20 @@
 import React from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
-import Paper from '@material-ui/core/Paper';
+import {Paper, Button} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { mergeClasses } from '@material-ui/styles';
 
 const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
-    marginLeft: '33%',
-    marginRight: '33%',
-    alignItems: 'center'
+    marginLeft: '20%',
+    marginRight: '20%',
+    alignItems: 'center',
+    padding: '5px'
+  },
+  button: {
+    variant: 'contained'
   }
 }))
 
@@ -20,10 +23,8 @@ export default function Login() {
   const classes = useStyles();
   return (
       <Paper className = {classes.root}>
-        <h1>Udacity Sales Feed</h1>
-        <p>This website requires users to authenticate themselves with Auth0</p>
-        <button onClick={() => loginWithRedirect()}>Log In</button>
-        
+        <p>This application requires users to authenticate themselves using Auth0.</p>
+        <Button className= {classes.button} variant = 'contained' onClick={() => loginWithRedirect()}>Log In</Button>
       </Paper>
   )
 }
