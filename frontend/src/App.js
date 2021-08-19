@@ -1,19 +1,18 @@
-import {useState} from 'react'
+import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import Login from './pages/Login'
-import { LoginContext } from './context/LoginContext';
+import Profile from './pages/Profile';
 
-function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
-  return (
-    <div className="App">
-      <LoginContext.Provider value={{loggedIn, setLoggedIn}}>
-        {!loggedIn
-        ? <h1><Login/></h1>
-        : <h1>display this if authenticated</h1>
-        }
-      </LoginContext.Provider>     
-    </div>
-  );
+export default function App() {
+  const {isAuthenticated} = useAuth0();
+
+  return(
+    isAuthenticated ? (
+      <div>
+        <Profile/>
+      </div>
+    )
+    : <Login/>
+  )
 }
 
-export default App;
