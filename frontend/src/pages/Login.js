@@ -2,6 +2,7 @@ import React from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 import {Paper, Button} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import theme from '../constants/theme'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -11,10 +12,17 @@ const useStyles = makeStyles(() => ({
     marginLeft: '20%',
     marginRight: '20%',
     alignItems: 'center',
-    padding: '5px'
+    padding: '5px',
+    backgroundColor: theme.container,
+    color: theme.buttonAndFont,
+    marginLeft: '5%',
+    marginRight: '5%',
+    minWidth: '100vh'
   },
   button: {
-    variant: 'contained'
+    variant: 'contained',
+    backgroundColor: theme.buttonAndFont,
+    color: theme.font
   }
 }))
 

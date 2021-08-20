@@ -1,46 +1,87 @@
 import React from 'react'
-import {Paper} from '@material-ui/core'
+import {Paper, Grid, Button} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
+import theme from '../constants/theme'
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginLeft: '10%',
-    marginRight: '10%',
-    marginBottom: '3%',
-    border: 'solid black 1px'
+  container: {
+    backgroundColor: theme.container,
+    marginBottom: '3vh',
+    borderRadius: '5px'
   },
-  top: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+  description: {
+    textAlign: 'center',
+    backgroundColor: theme.content,
+    color: theme.buttonAndFont,
+    minHeight: '5vh'
   },
-  content: {
+  image: {
+    maxHeight: '90vh',
+    textAlign: 'center',
+    backgroundColor: theme.content
+  },
+  toolbar: {
+    textAlign: 'center',
+    backgroundColor: theme.content,
+    color: theme.buttonAndFont,
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'center'
+  },
+  title: {
+    textAlign: 'center',
+    backgroundColor: theme.content,
+    color: theme.buttonAndFont,
+    minHeight: '5vh'
+  },
+  button: {
+    backgroundColor: theme.buttonAndFont,
+    color: theme.font,
+    margin: '2vh'
   }
-
 }));
 
 export default function Post({post}) {
   const classes = useStyles();
 
-  //refactor this as a grid
   return (
-    <Paper className = {classes.root}>
-      <div className = {classes.top}>
-        <h2>{post.title}</h2> 
-        <span>{post.date_created}</span>
-      </div>
-      <div className = {classes.content}>
-       {post.image_url ? <img src = {post.image_url} height = '150' width = '150'/> : <p>No img available</p>}
-       <p>{post.description}</p>
-      </div>
-    </Paper>
+    
+    <Grid container spacing = {2} className = {classes.container}>
+      
+      <Grid item xs = {12}>
+        <Paper className = {classes.title}>
+          <h1>{post.title}</h1>
+        </Paper>
+      </Grid>
+
+      <Grid item xs = {12}>
+        <Paper className = {classes.description}>
+          <h3>Posted on: {post.date_created}</h3>
+        </Paper>
+      </Grid>
+
+      <Grid item xs = {4}>
+        <Paper className = {classes.image}>
+          {post.image_url ? <img src = {post.image_url} width = '100%' height = '100%'/> : <p>No img available</p>}
+        </Paper>
+      </Grid>
+
+      <Grid item xs = {8}>
+        <Paper className = {classes.description}>
+          {post.description}
+        </Paper>
+      </Grid>
+
+      <Grid item xs = {12}>
+        <Paper className = {classes.toolbar}>
+          <Button className = {classes.button}><EditIcon/>Edit</Button>
+          <Button className = {classes.button}><DeleteIcon/>Delete</Button>
+        </Paper>
+      </Grid>
+      
+    </Grid>
+    
       
     
   )
