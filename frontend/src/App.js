@@ -1,19 +1,23 @@
-import {useState} from 'react'
+import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import Login from './pages/Login'
-import { LoginContext } from './context/LoginContext';
+import Profile from './pages/Profile';
+import Feed from './pages/Feed'
 
-function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
-  return (
+export default function App() {
+  const {isAuthenticated, user} = useAuth0();
+
+  return(
     <div className="App">
-      <LoginContext.Provider value={{loggedIn, setLoggedIn}}>
-        {!loggedIn
-        ? <h1><Login/></h1>
-        : <h1>display this if authenticated</h1>
-        }
-      </LoginContext.Provider>     
-    </div>
-  );
+      <h1>Udacity Header component will be here</h1>
+    {isAuthenticated ? (
+      <div>
+        <Feed userEmail = {user.email}/>
+      </div>
+    )
+    : <Login/>}
+    <h4>Udacity Footer component will be here</h4>
+  </div>
+  )
 }
 
-export default App;
