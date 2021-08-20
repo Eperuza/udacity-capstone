@@ -8,8 +8,8 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    marginLeft: '10%',
-    marginRight: '10%'
+    marginLeft: '5%',
+    marginRight: '5%'
   }
 }));
 
@@ -22,7 +22,7 @@ export default function Feed({userEmail}) {
   
   useEffect(() => {
     //fetch the posts created by that user, set the response with useState hook
-    //pass userEmail in http req
+    //pass userEmail in http req for the db query
     setPosts([fakePost, fakePost])
     setLoading(false)
   }, []);
@@ -32,7 +32,7 @@ export default function Feed({userEmail}) {
   return (
     <div className = {classes.feed}>
       {loading 
-      //implement a load spinner
+      //implement a load spinner eventually
       ? <p>Loading Feed...</p>
       :
         //with the post objects retrieved, render the post components

@@ -34,6 +34,11 @@ const useStyles = makeStyles(() => ({
     backgroundColor: theme.content,
     color: theme.buttonAndFont,
     minHeight: '5vh'
+  },
+  button: {
+    backgroundColor: theme.buttonAndFont,
+    color: theme.font,
+    margin: '2vh'
   }
 }));
 
@@ -70,8 +75,8 @@ export default function Post({post}) {
 
       <Grid item xs = {12}>
         <Paper className = {classes.toolbar}>
-          <Button><EditIcon/>Edit</Button>
-          <Button><DeleteIcon/>Delete</Button>
+          <Button className = {classes.button}><EditIcon/>Edit</Button>
+          <Button className = {classes.button}><DeleteIcon/>Delete</Button>
         </Paper>
       </Grid>
       
