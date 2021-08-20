@@ -5,9 +5,6 @@ import theme from '../constants/theme'
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
-const contentWidth = '60vh';
-const contentHeight = '90vh';
-
 const useStyles = makeStyles(() => ({
   container: {
     backgroundColor: theme.container,
@@ -21,7 +18,7 @@ const useStyles = makeStyles(() => ({
     minHeight: '5vh'
   },
   image: {
-    maxHeight: contentHeight,
+    maxHeight: '90vh',
     textAlign: 'center',
     backgroundColor: theme.content
   },
