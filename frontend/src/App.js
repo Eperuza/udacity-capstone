@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Feed from './pages/Feed'
 import Header from './components/Header';
 import Footer from './components/Footer';
+import CreatePostForm from './pages/CreatePostForm';
 
 export default function App() {
   const {isAuthenticated, user} = useAuth0();
@@ -14,11 +15,12 @@ export default function App() {
       {isAuthenticated 
       ? 
       (
-        <div>
-          <Feed userEmail = {user.email}/>
-        </div>
+        <Feed userEmail = {user.email}/>
+        
+        
       )
-      : <Login/>
+      : //<Login/>
+      <CreatePostForm/>
       }
     <Footer/>
   </div>
