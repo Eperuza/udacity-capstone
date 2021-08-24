@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form'
 import {TextField, Button, Input, makeStyles, IconButton, Typography} from '@material-ui/core'
 import {PhotoCamera} from '@material-ui/icons'
 import theme from '../constants/theme'
+import { uploadS3 } from '../util/aws'
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -18,7 +19,6 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'space-around',
   },
   input: {
-    backgroundColor: theme.content,
   },
   button: {
     variant: 'contained',
@@ -32,18 +32,22 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function CreatePostForm({userEmail}) {
-  const {control, handleSubmit} = useForm();
-  const onSubmit = (data) => console.log(data)
+  const {register, control, handleSubmit, formState: {errors}} = useForm();
+  const onSubmit = (data) => {
+    uploadS3(data.postFile[0])
+  }
   const classes = useStyles();
 
   return (
     <form onSubmit = {handleSubmit(onSubmit)} className = {classes.form}>
-      {/*Title Input*/}
+      
+      {/* // Title Input*/}
       <Controller
         name = "postTitle"
         control = {control}
         defaultValue = ""
         className = {classes.input}
+        rules = {{required: true}}
         render = {({field}) => <TextField {...field} id = "postTitle" label= "Post Title"/>}
       />
 
@@ -53,26 +57,10 @@ export default function CreatePostForm({userEmail}) {
         control = {control}
         defaultValue = ""
         className = {classes.input}
+        rules = {{required: true}}
         render = {({field}) => <TextField {...field} id = "postDesc" label = "Post Description" minRows = {3} maxRows = {4} multiline = {true}/>}
       />
-      
-      {/*File Input*/}
-      <div>
-      <Typography>Upload an Image</Typography>
-      <Controller
-        name = "postFile"
-        control = {control}
-        defaultValue = ""
-        render = {({field}) => (
-        <label htmlFor = "postFile">
-          <input {...field} accept = "image/*" id = "postFile" type = "file" hidden ="true"/>
-          <IconButton color = "primary" aria-label = "uploadPicture" component = "span">
-            <PhotoCamera />
-          </IconButton>
-        </label>
-        )}
-      />
-      </div>
+      <input {...register('postFile')} type = "file" name = "postFile" accept = "image/*"/>   
 
       {/*Submit form*/}
       <Button className = {classes.button} type = "submit">Publish Post</Button>
@@ -92,3 +80,8 @@ export default function CreatePostForm({userEmail}) {
   }
 */
 //send object to server -> create db entry -> succesful response -> go back to user feed
+
+
+
+      
+      
