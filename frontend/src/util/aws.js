@@ -1,6 +1,6 @@
 import S3 from 'react-aws-s3';
 
-export const uploadS3 = (fileName) => {
+export const uploadS3 = (fileName, userEmail, formData) => {
 
   const config = {
     bucketName: 'udacity-sales',
@@ -11,6 +11,11 @@ export const uploadS3 = (fileName) => {
   const ReactS3Client = new S3(config);
   ReactS3Client
     .uploadFile(fileName)
-    .then(data => console.log(data))
+    .then(data => console.log({
+      title: formData.postTitle, 
+      description: formData.postDesc, 
+      user: userEmail, 
+      image_url: data.location
+    }))
     .catch(err => console.error(err))
 }

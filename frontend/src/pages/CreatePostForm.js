@@ -34,7 +34,8 @@ const useStyles = makeStyles(() => ({
 export default function CreatePostForm({userEmail}) {
   const {register, control, handleSubmit, formState: {errors}} = useForm();
   const onSubmit = (data) => {
-    uploadS3(data.postFile[0])
+    data.postFile.length !== 0 ? uploadS3(data.postFile[0], userEmail, data) 
+    : console.log('send post straight to api')
   }
   const classes = useStyles();
 
