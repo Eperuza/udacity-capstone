@@ -5,6 +5,7 @@ import Feed from './pages/Feed'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CreatePostForm from './pages/CreatePostForm';
+import {Switch, Route} from 'react-router-dom'
 
 export default function App() {
   const {isAuthenticated, user} = useAuth0();
@@ -15,12 +16,17 @@ export default function App() {
       {isAuthenticated 
       ? 
       (
-        <Feed userEmail = {user.email}/>
-        
-        
+      <Switch>
+        <Route exact path = "/">
+           <Feed userEmail = {user.email}/>
+        </Route>
+
+        <Route exact path = "/createPost">
+          <CreatePostForm/>
+        </Route>
+      </Switch>
       )
-      : //<Login/>
-      <CreatePostForm/>
+      : <Login/>
       }
     <Footer/>
   </div>

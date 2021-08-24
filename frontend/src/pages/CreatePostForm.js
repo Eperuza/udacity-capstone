@@ -4,6 +4,7 @@ import {TextField, Button, Input, makeStyles, IconButton, Typography} from '@mat
 import {PhotoCamera} from '@material-ui/icons'
 import theme from '../constants/theme'
 import { uploadS3 } from '../util/aws'
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -28,11 +29,16 @@ const useStyles = makeStyles(() => ({
     marginLeft: 'auto',
     marginRight: 'auto'
     
+  },
+  bar: {
+    display: 'flex',
+    justifyContent: 'space-around'
   }
 }));
 
 export default function CreatePostForm({userEmail}) {
   const {register, control, handleSubmit, formState: {errors}} = useForm();
+  let history = useHistory();
   const onSubmit = (data) => {
     data.postFile.length !== 0 ? uploadS3(data.postFile[0], userEmail, data) 
     : console.log('send post straight to api')
@@ -64,7 +70,11 @@ export default function CreatePostForm({userEmail}) {
       <input {...register('postFile')} type = "file" name = "postFile" accept = "image/*"/>   
 
       {/*Submit form*/}
-      <Button className = {classes.button} type = "submit">Publish Post</Button>
+      <div className = {classes.bar}>
+        <Button className = {classes.button} type = "submit">Publish Post</Button>
+        <Button className = {classes.button} onClick ={() => history.push("/")}>Cancel</Button>
+      </div>
+      
     </form>
   )
 }
