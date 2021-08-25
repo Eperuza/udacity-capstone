@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core'
 import theme from '../constants/theme'
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -43,6 +44,7 @@ const useStyles = makeStyles(() => ({
 
 export default function Post({post}) {
   const classes = useStyles();
+  let history = useHistory();
 
   return (
     
@@ -74,7 +76,7 @@ export default function Post({post}) {
 
       <Grid item xs = {12}>
         <div className = {classes.toolbar}>
-          <Button className = {classes.button}><EditIcon/>Edit</Button>
+          <Button className = {classes.button} onClick = {() => history.push('/editPost')}><EditIcon/>Edit</Button>
           <Button className = {classes.button}><DeleteIcon/>Delete</Button>
         </div>
       </Grid>

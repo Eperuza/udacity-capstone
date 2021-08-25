@@ -22,7 +22,11 @@ export default function App() {
         </Route>
 
         <Route exact path = "/createPost">
-          <CreatePostForm/>
+          <CreatePostForm userEmail = {user.email}/>
+        </Route>
+
+        <Route exact path = "/editPost">
+          <p>Edit Post component</p>
         </Route>
       </Switch>
       )
