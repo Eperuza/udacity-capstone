@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core'
 import theme from '../constants/theme'
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -24,16 +25,15 @@ const useStyles = makeStyles(() => ({
   },
   toolbar: {
     textAlign: 'center',
-    backgroundColor: theme.content,
     color: theme.buttonAndFont,
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'flex-end'
   },
   title: {
     textAlign: 'center',
     backgroundColor: theme.content,
     color: theme.buttonAndFont,
-    minHeight: '5vh'
+    minHeight: '5vh',
   },
   button: {
     backgroundColor: theme.buttonAndFont,
@@ -44,6 +44,7 @@ const useStyles = makeStyles(() => ({
 
 export default function Post({post}) {
   const classes = useStyles();
+  let history = useHistory();
 
   return (
     
@@ -63,7 +64,7 @@ export default function Post({post}) {
 
       <Grid item xs = {4}>
         <Paper className = {classes.image}>
-          {post.image_url ? <img src = {post.image_url} width = '100%' height = '100%'/> : <p>No img available</p>}
+          {post.image_url ? <img src = {post.image_url} width = '75%' height = '75%'/> : <p>No img available</p>}
         </Paper>
       </Grid>
 
@@ -74,10 +75,10 @@ export default function Post({post}) {
       </Grid>
 
       <Grid item xs = {12}>
-        <Paper className = {classes.toolbar}>
-          <Button className = {classes.button}><EditIcon/>Edit</Button>
+        <div className = {classes.toolbar}>
+          <Button className = {classes.button} onClick = {() => history.push('/editPost')}><EditIcon/>Edit</Button>
           <Button className = {classes.button}><DeleteIcon/>Delete</Button>
-        </Paper>
+        </div>
       </Grid>
       
     </Grid>

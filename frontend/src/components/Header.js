@@ -5,6 +5,8 @@ import theme from '../constants/theme'
 import { useAuth0 } from '@auth0/auth0-react';
 import {Button} from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AddIcon from '@material-ui/icons/Add';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -29,13 +31,18 @@ const useStyles = makeStyles(() => ({
     backgroundColor: theme.buttonAndFont,
     color: theme.font,
     margin: '2vh',
-    maxWidth: '20vh'
+    maxWidth: '25vh'
+  },
+  nav: {
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 }));
 
 export default function Header() {
   const classes = useStyles();
   const {isAuthenticated, logout} = useAuth0();
+  let history = useHistory();
   return (
     <Paper className = {classes.container}>
       {isAuthenticated 
@@ -43,7 +50,10 @@ export default function Header() {
       (
         <div className = {classes.toolbar}>
           <h1>Udacity Community Sales</h1>
-          <Button className = {classes.button} onClick={() => logout({ returnTo: window.location.origin })}><ExitToAppIcon/>Log Out</Button>
+          <div className = {classes.nav}>
+            <Button className = {classes.button } onClick = {() => history.push("/createPost")}><AddIcon />Create Post</Button>
+            <Button className = {classes.button} onClick={() => logout({ returnTo: window.location.origin })}><ExitToAppIcon/>Log Out</Button>
+          </div>
         </div>
       )
       : <h1>Udacity Community Sales</h1>

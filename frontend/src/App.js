@@ -4,6 +4,8 @@ import Login from './pages/Login'
 import Feed from './pages/Feed'
 import Header from './components/Header';
 import Footer from './components/Footer';
+import CreatePostForm from './pages/CreatePostForm';
+import {Switch, Route} from 'react-router-dom'
 
 export default function App() {
   const {isAuthenticated, user} = useAuth0();
@@ -14,9 +16,19 @@ export default function App() {
       {isAuthenticated 
       ? 
       (
-        <div>
-          <Feed userEmail = {user.email}/>
-        </div>
+      <Switch>
+        <Route exact path = "/">
+           <Feed userEmail = {user.email}/>
+        </Route>
+
+        <Route exact path = "/createPost">
+          <CreatePostForm userEmail = {user.email}/>
+        </Route>
+
+        <Route exact path = "/editPost">
+          <p>Edit Post component</p>
+        </Route>
+      </Switch>
       )
       : <Login/>
       }

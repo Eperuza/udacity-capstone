@@ -23,7 +23,7 @@ export default function Feed({userEmail}) {
   useEffect(() => {
     //fetch the posts created by that user, set the response with useState hook
     //pass userEmail in http req for the db query
-    setPosts([fakePost, fakePost])
+    setPosts([fakePost, {...fakePost, id: 2}])
     setLoading(false)
   }, []);
 
@@ -37,7 +37,7 @@ export default function Feed({userEmail}) {
       :
         //with the post objects retrieved, render the post components
         posts.map( post => {
-          return <Post post = {post}/>
+          return <Post key = {post.id} post = {post}/>
         })
     }
     </div>
