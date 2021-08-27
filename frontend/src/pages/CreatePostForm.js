@@ -40,13 +40,13 @@ export default function CreatePostForm({userEmail}) {
   const {register, control, handleSubmit, formState: {errors}} = useForm();
   let history = useHistory();
 
-  const uploadWithImg = (data, userEmail) => {
-    createPost(data.postFile[0], userEmail, data);
+  const uploadWithImg = async (data, userEmail) => {
+    await createPost(data.postFile[0], userEmail, data);
     history.push('/');
   }
 
-  const uploadWithoutImg = (data, userEmail) => {
-    createPostNoImg(data, userEmail);
+  const uploadWithoutImg = async (data, userEmail) => {
+    await createPostNoImg(data, userEmail);
     history.push('/');
   }
 

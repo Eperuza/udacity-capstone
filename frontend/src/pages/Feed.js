@@ -36,7 +36,7 @@ export default function Feed({userEmail}) {
       :
         //with the post objects retrieved, render the post components
         posts.map( post => {
-          return <Post key = {post.id} post = {post}/>
+          return <Post key = {post.id} post = {post} setPosts = {setPosts} posts = {posts}/>
         })
     }
     </div>
