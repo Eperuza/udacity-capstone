@@ -25,11 +25,21 @@ export const createPost = (file, userEmail, formData) => {
   
   ReactS3Client
     .uploadFile(file, newFileName)
-    .then(data => console.log({
+    .then(data => axios.post(apiUrl, {
       title: formData.postTitle, 
       description: formData.postDesc, 
       user_email: userEmail, 
       image_url: data.location
     }))
     .catch(err => console.error(err))
+}
+
+export const createPostNoImg = (formData, userEmail) => {
+  axios.post(apiUrl, {
+    title: formData.postTitle, 
+    description: formData.postDesc, 
+    user_email: userEmail
+  })
+  .then(data => console.log(data))
+  .catch(err => console.error(err))
 }
