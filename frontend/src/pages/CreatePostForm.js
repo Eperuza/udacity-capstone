@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form'
 import {TextField, Button, Input, makeStyles, IconButton, Typography} from '@material-ui/core'
 import {PhotoCamera} from '@material-ui/icons'
 import theme from '../constants/theme'
-import { uploadS3 } from '../util/aws'
+import { createPost } from '../util/api'
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
@@ -40,7 +40,7 @@ export default function CreatePostForm({userEmail}) {
   const {register, control, handleSubmit, formState: {errors}} = useForm();
   let history = useHistory();
   const onSubmit = (data) => {
-    data.postFile.length !== 0 ? uploadS3(data.postFile[0], userEmail, data) 
+    data.postFile.length !== 0 ? createPost(data.postFile[0], userEmail, data) 
     : console.log('send post straight to api')
   }
   const classes = useStyles();
