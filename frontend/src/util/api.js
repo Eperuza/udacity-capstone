@@ -7,10 +7,19 @@ export const getPosts = async (userEmail, callback) => {
   .then(res => callback(res.data))
   .catch(err => {
     console.log(userEmail)
-    console.log(err.toJSON())
+    console.error(err)
   })
-
 }
+
+export const getSpecificPost = async (id, callback) => {
+  await axios.get(`${apiUrl}/${id}`)
+  .then(res => callback(res.data[0]))
+  .catch(err => {
+    console.log(id)
+    console.error(err)
+  })
+}
+
 
 export const createPost = (file, userEmail, formData) => {
 

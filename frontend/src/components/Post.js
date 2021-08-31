@@ -83,7 +83,7 @@ export default function Post({post, setPosts, posts}) {
 
       <Grid item xs = {12}>
         <div className = {classes.toolbar}>
-          <Button className = {classes.button} onClick = {() => history.push('/editPost')}><EditIcon/>Edit</Button>
+          <Button className = {classes.button} onClick = {() => history.push(`/editPost/${post.id}`)}><EditIcon/>Edit</Button>
           <Button className = {classes.button} onClick = { () => delPost(post)}><DeleteIcon/>Delete</Button>
         </div>
       </Grid>
