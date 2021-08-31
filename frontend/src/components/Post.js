@@ -5,6 +5,7 @@ import theme from '../constants/theme'
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { useHistory } from 'react-router-dom';
+import { deletePost } from '../util/api'
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -42,9 +43,15 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function Post({post}) {
+export default function Post({post, setPosts, posts}) {
   const classes = useStyles();
   let history = useHistory();
+
+  const delPost = async (post) => {
+    await deletePost(post);
+    const postRemove = posts.find(item => item.id === post.id)
+    setPosts(posts.filter(post => post.id !== postRemove.id))
+  }
 
   return (
     
@@ -77,7 +84,7 @@ export default function Post({post}) {
       <Grid item xs = {12}>
         <div className = {classes.toolbar}>
           <Button className = {classes.button} onClick = {() => history.push('/editPost')}><EditIcon/>Edit</Button>
-          <Button className = {classes.button}><DeleteIcon/>Delete</Button>
+          <Button className = {classes.button} onClick = { () => delPost(post)}><DeleteIcon/>Delete</Button>
         </div>
       </Grid>
       
