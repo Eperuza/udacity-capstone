@@ -1,6 +1,8 @@
 import S3 from 'react-aws-s3';
+import { getFileName } from './utils'
 const axios = require('axios');
 const apiUrl = process.env.REACT_APP_API_URL;
+
 
 export const getPosts = async (userEmail, callback) => {
   await axios.get(`${apiUrl}/?user=${userEmail}`)
@@ -66,6 +68,10 @@ export const deletePost = (post) => {
     }
     const ReactS3Client = new S3(config);
     //need to write logic to delete item from s3 if post is deleted and has an img
+    const fileName = getFileName(post.image_url);
+    ReactS3Client.deleteFile(fileName)
+    .then(res => console.log(res))
+    .catch(err => console.error(err))
   })
   .catch(err => console.error(err))
 }
