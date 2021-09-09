@@ -69,3 +69,12 @@ export const deletePost = (post) => {
   })
   .catch(err => console.error(err))
 }
+
+export const editPost = (id, formData) => {
+  axios.put(`${apiUrl}/${id}`, {
+    title: formData.postTitle, 
+    description: formData.postDesc,
+  })
+  .then(data => console.log(data))
+  .catch(err => console.error(err))
+}
