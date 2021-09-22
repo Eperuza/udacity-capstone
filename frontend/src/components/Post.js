@@ -6,6 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { useHistory } from 'react-router-dom';
 import { deletePost } from '../util/api'
+import {convertDate} from '../util/utils'
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -69,7 +70,7 @@ export default function Post({post, setPosts, posts}) {
 
       <Grid item xs = {12}>
         <Paper className = {classes.description}>
-          <h3>Posted on: {post.date}</h3>
+          <h3>Posted on: {convertDate(post.date)}</h3>
         </Paper>
       </Grid>
 

@@ -42,12 +42,12 @@ export default function CreatePostForm({userEmail}) {
 
   const uploadWithImg = async (data, userEmail) => {
     await createPost(data.postFile[0], userEmail, data);
-    history.push('/');
+    setTimeout(() => {history.push('/')}, 1000);
   }
 
   const uploadWithoutImg = async (data, userEmail) => {
     await createPostNoImg(data, userEmail);
-    history.push('/');
+    setTimeout(() => {history.push('/')}, 1000);
   }
 
   const onSubmit = (data) => {

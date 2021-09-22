@@ -42,7 +42,7 @@ export const createPost = (file, userEmail, formData) => {
       user_email: userEmail, 
       image_url: data.location
     }))
-
+    .then(res => console.log(res))
     .catch(err => console.error(err))
 }
 
