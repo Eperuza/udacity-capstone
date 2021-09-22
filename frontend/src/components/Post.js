@@ -11,7 +11,11 @@ const useStyles = makeStyles(() => ({
   container: {
     backgroundColor: theme.container,
     marginBottom: '3vh',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    marginLeft: '10px',
+    marginRight: '10px',
+    maxWidth: '100vh',
+    border: 'black solid 1px'
   },
   description: {
     textAlign: 'center',

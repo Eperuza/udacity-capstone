@@ -10,7 +10,11 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     justifyContent: 'space-around',
     marginLeft: '5%',
-    marginRight: '5%'
+    marginRight: '5%',
+    textAlign: 'center',
+    // backgroundColor: '#5CDB95',
+    alignItems: 'center',
+    color: '#05386B'
   }
 }));
 
