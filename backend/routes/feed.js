@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
   knex.select('*')
   .from('posts')
   .where({user_email: userEmail})
+  .orderBy('date', 'desc')
   .then(data => res.status(200).json(data))
   .catch(err => res.status(400).send(err))
 });
