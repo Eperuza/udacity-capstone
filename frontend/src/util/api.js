@@ -67,11 +67,12 @@ export const deletePost = (post) => {
       secretAccessKey: process.env.REACT_APP_AWS_SECRETKEY,
     }
     const ReactS3Client = new S3(config);
-    //need to write logic to delete item from s3 if post is deleted and has an img
-    const fileName = getFileName(post.image_url);
-    ReactS3Client.deleteFile(fileName)
-    .then(res => console.log(res))
-    .catch(err => console.error(err))
+    if(post.image_url){
+      const fileName = getFileName(post.image_url);
+      ReactS3Client.deleteFile(fileName)
+      .then(res => console.log(res))
+      .catch(err => console.error(err))
+    }
   })
   .catch(err => console.error(err))
 }

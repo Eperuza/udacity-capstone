@@ -51,10 +51,10 @@ export default function Post({post, setPosts, posts}) {
     await deletePost(post);
     const postRemove = posts.find(item => item.id === post.id)
     setPosts(posts.filter(post => post.id !== postRemove.id))
+    console.log(post)
   }
 
   return (
-    
     <Grid container spacing = {2} className = {classes.container}>
       
       <Grid item xs = {12}>
@@ -65,7 +65,7 @@ export default function Post({post, setPosts, posts}) {
 
       <Grid item xs = {12}>
         <Paper className = {classes.description}>
-          <h3>Posted on: {post.date_created}</h3>
+          <h3>Posted on: {post.date}</h3>
         </Paper>
       </Grid>
 
