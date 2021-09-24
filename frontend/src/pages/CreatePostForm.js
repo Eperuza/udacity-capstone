@@ -68,8 +68,13 @@ export default function CreatePostForm({userEmail}) {
         defaultValue = ""
         className = {classes.input}
         rules = {{required: true}}
-        render = {({field}) => <TextField {...field} id = "postTitle" label= "Post Title"/>}
+        render = {({field}) => <TextField {...field} id = "postTitle" label= "Post Title" aria-invalid={errors.postTitle ? "true" : "false"}/>}
       />
+
+      {errors.postTitle && errors.postTitle.type === "required" && (
+        // <span role="alert">Post title required.</span>
+        <Typography>Post title is required.</Typography>
+      )}
 
       {/*Description Input*/}
       <Controller
@@ -78,8 +83,14 @@ export default function CreatePostForm({userEmail}) {
         defaultValue = ""
         className = {classes.input}
         rules = {{required: true}}
-        render = {({field}) => <TextField {...field} id = "postDesc" label = "Post Description" minRows = {3} maxRows = {4} multiline = {true}/>}
+        render = {({field}) => <TextField {...field} id = "postDesc" label = "Post Description" minRows = {3} maxRows = {4} multiline = {true} aria-invalid={errors.postDesc ? "true" : "false"}/>}
       />
+
+      {errors.postDesc && errors.postDesc.type === "required" && (
+        // <span role="alert">Post description required.</span>
+        <Typography>Post description is required.</Typography>
+      )}
+
       <input {...register('postFile')} type = "file" name = "postFile" accept = "image/*"/>   
 
       {/*Submit form*/}
