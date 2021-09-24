@@ -1,5 +1,6 @@
 import React from 'react'
-import {Paper, Grid, Button} from '@material-ui/core'
+import { useState } from 'react'
+import {Paper, Grid, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
 import theme from '../constants/theme'
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -59,6 +60,21 @@ export default function Post({post, setPosts, posts}) {
     console.log(post)
   }
 
+  //dialog state management
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleDelete = (post) => {
+    handleClose();
+    delPost(post);
+
+  }
+  //end dialog state management
+
   return (
     <Grid container spacing = {2} className = {classes.container}>
       
@@ -89,11 +105,36 @@ export default function Post({post, setPosts, posts}) {
       <Grid item xs = {12}>
         <div className = {classes.toolbar}>
           <Button className = {classes.button} onClick = {() => history.push(`/editPost/${post.id}`)}><EditIcon/>Edit</Button>
-          <Button className = {classes.button} onClick = { () => delPost(post)}><DeleteIcon/>Delete</Button>
+          {/* <Button className = {classes.button} onClick = { () => delPost(post)}><DeleteIcon/>Delete</Button> */}
+          <Button className = {classes.button} onClick = { () => handleClickOpen()}><DeleteIcon/>Delete</Button>
         </div>
       </Grid>
       
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Delete confirmation"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This action is irreversible and your sales post will be deleted.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => handleClose()}>No</Button>
+          <Button onClick={() => handleDelete(post)} autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      
     </Grid>
+    
     
       
     
