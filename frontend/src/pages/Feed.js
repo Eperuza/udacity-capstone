@@ -21,10 +21,20 @@ export default function Feed({userEmail}) {
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(true);
   
-  useEffect(async () => {
+  const loadFeed = async (userEmail, setPosts) => {
     await getPosts(userEmail, setPosts)
     setLoading(false)
-  }, []);
+  }
+  //this worked, before correcting
+  // useEffect(async () => {
+  //   await getPosts(userEmail, setPosts)
+  //   setLoading(false)
+  // }, []);
+
+  //this cleared console errors
+  useEffect(() => {
+    loadFeed(userEmail, setPosts)
+  }, [userEmail]);
 
   const classes = useStyles();
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import {TextField, Button, Input, makeStyles, IconButton, Typography} from '@material-ui/core'
-import {PhotoCamera} from '@material-ui/icons'
+import {TextField, Button,makeStyles, Typography} from '@material-ui/core'
 import theme from '../constants/theme'
 import { createPost, createPostNoImg } from '../util/api'
 import { useHistory } from 'react-router-dom';

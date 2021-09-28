@@ -9,14 +9,12 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
-    marginLeft: '20%',
-    marginRight: '20%',
+    marginLeft: '5%',
+    marginRight: '5%',
     alignItems: 'center',
     padding: '5px',
     backgroundColor: theme.container,
     color: theme.buttonAndFont,
-    marginLeft: '5%',
-    marginRight: '5%',
     minWidth: '100vh'
   },
   button: {

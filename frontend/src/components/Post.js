@@ -92,7 +92,7 @@ export default function Post({post, setPosts, posts}) {
 
       <Grid item xs = {4}>
         <Paper className = {classes.image}>
-          {post.image_url ? <img src = {post.image_url} width = '75%' height = '75%'/> : <p>No img available</p>}
+          {post.image_url ? <img src = {post.image_url} width = '75%' height = '75%' alt = {post.title}/> : <p>No img available</p>}
         </Paper>
       </Grid>
 

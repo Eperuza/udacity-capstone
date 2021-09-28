@@ -1,10 +1,9 @@
 import React from 'react'
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { getSpecificPost } from '../util/api'
 import { useHistory } from 'react-router-dom';
 import theme from '../constants/theme'
-import {TextField, Button, Input, makeStyles, IconButton, Typography} from '@material-ui/core'
+import {TextField, Button, makeStyles} from '@material-ui/core'
 import { useForm, Controller } from 'react-hook-form'
 import { editPost } from '../util/api'
 
@@ -39,13 +38,14 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function EditPostForm({match}) {
-  const {register, control, handleSubmit, formState: {errors}} = useForm();
+  // const {register, control, handleSubmit, formState: {errors}} = useForm();
+  const {control, handleSubmit} = useForm();
 
   const [post, setPost] = useState(null);
 
   useEffect(() => {
     getSpecificPost(match.params.id, setPost)
-  })
+  }, [match.params.id])
 
   let history = useHistory();
 
