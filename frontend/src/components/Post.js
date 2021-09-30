@@ -1,17 +1,23 @@
 import React from 'react'
-import {Paper, Grid, Button} from '@material-ui/core'
+import { useState } from 'react'
+import {Paper, Grid, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
 import theme from '../constants/theme'
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { useHistory } from 'react-router-dom';
 import { deletePost } from '../util/api'
+import {convertDate} from '../util/utils'
 
 const useStyles = makeStyles(() => ({
   container: {
     backgroundColor: theme.container,
     marginBottom: '3vh',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    marginLeft: '10px',
+    marginRight: '10px',
+    maxWidth: '100vh',
+    border: 'black solid 1px'
   },
   description: {
     textAlign: 'center',
@@ -51,10 +57,25 @@ export default function Post({post, setPosts, posts}) {
     await deletePost(post);
     const postRemove = posts.find(item => item.id === post.id)
     setPosts(posts.filter(post => post.id !== postRemove.id))
+    console.log(post)
   }
 
+  //dialog state management
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleDelete = (post) => {
+    handleClose();
+    delPost(post);
+
+  }
+  //end dialog state management
+
   return (
-    
     <Grid container spacing = {2} className = {classes.container}>
       
       <Grid item xs = {12}>
@@ -65,13 +86,13 @@ export default function Post({post, setPosts, posts}) {
 
       <Grid item xs = {12}>
         <Paper className = {classes.description}>
-          <h3>Posted on: {post.date_created}</h3>
+          <h3>Posted on: {convertDate(post.date)}</h3>
         </Paper>
       </Grid>
 
       <Grid item xs = {4}>
         <Paper className = {classes.image}>
-          {post.image_url ? <img src = {post.image_url} width = '75%' height = '75%'/> : <p>No img available</p>}
+          {post.image_url ? <img src = {post.image_url} width = '75%' height = '75%' alt = {post.title}/> : <p>No img available</p>}
         </Paper>
       </Grid>
 
@@ -83,12 +104,37 @@ export default function Post({post, setPosts, posts}) {
 
       <Grid item xs = {12}>
         <div className = {classes.toolbar}>
-          <Button className = {classes.button} onClick = {() => history.push('/editPost')}><EditIcon/>Edit</Button>
-          <Button className = {classes.button} onClick = { () => delPost(post)}><DeleteIcon/>Delete</Button>
+          <Button className = {classes.button} onClick = {() => history.push(`/editPost/${post.id}`)}><EditIcon/>Edit</Button>
+          {/* <Button className = {classes.button} onClick = { () => delPost(post)}><DeleteIcon/>Delete</Button> */}
+          <Button className = {classes.button} onClick = { () => handleClickOpen()}><DeleteIcon/>Delete</Button>
         </div>
       </Grid>
       
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Delete confirmation"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            This action is irreversible and your sales post will be deleted.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => handleClose()}>No</Button>
+          <Button onClick={() => handleDelete(post)} autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      
     </Grid>
+    
     
       
     

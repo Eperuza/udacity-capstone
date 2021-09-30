@@ -5,10 +5,11 @@ const knex = require('knex')(require('../knexfile.js')[process.env.ENVIRONMENT])
 
 //return all posts that belong to a user
 router.get('/', (req, res) => {
-  const userEmail = req.body.user
+  const userEmail = req.query.user
   knex.select('*')
   .from('posts')
   .where({user_email: userEmail})
+  .orderBy('date', 'desc')
   .then(data => res.status(200).json(data))
   .catch(err => res.status(400).send(err))
 });
@@ -28,8 +29,8 @@ router.post('/', (req, res)=> {
   .insert(
     {
     title: req.body.title,
-    description: req.body.title,
-    user_email: req.body.user,
+    description: req.body.description,
+    user_email: req.body.user_email,
     image_url: req.body.image_url
     }
   )
@@ -47,7 +48,13 @@ router.delete('/:id', (req, res) => {
 })
 
 //edit a post
-//TO DO
+router.put('/:id', (req, res) => {
+  knex('posts')
+  .where({id: parseInt(req.params.id)})
+  .update({title: req.body.title, description: req.body.description})
+  .then(data => res.status(200).send(req.body))
+  .catch(err => res.status(400).send(err))
+})
 
 
 module.exports = router;

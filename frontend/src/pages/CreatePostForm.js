@@ -1,7 +1,6 @@
 import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import {TextField, Button, Input, makeStyles, IconButton, Typography} from '@material-ui/core'
-import {PhotoCamera} from '@material-ui/icons'
+import {TextField, Button,makeStyles, Typography} from '@material-ui/core'
 import theme from '../constants/theme'
 import { createPost, createPostNoImg } from '../util/api'
 import { useHistory } from 'react-router-dom';
@@ -42,12 +41,12 @@ export default function CreatePostForm({userEmail}) {
 
   const uploadWithImg = async (data, userEmail) => {
     await createPost(data.postFile[0], userEmail, data);
-    history.push('/');
+    setTimeout(() => {history.push('/')}, 1000);
   }
 
   const uploadWithoutImg = async (data, userEmail) => {
     await createPostNoImg(data, userEmail);
-    history.push('/');
+    setTimeout(() => {history.push('/')}, 1000);
   }
 
   const onSubmit = (data) => {
@@ -68,8 +67,13 @@ export default function CreatePostForm({userEmail}) {
         defaultValue = ""
         className = {classes.input}
         rules = {{required: true}}
-        render = {({field}) => <TextField {...field} id = "postTitle" label= "Post Title"/>}
+        render = {({field}) => <TextField {...field} id = "postTitle" label= "Post Title" aria-invalid={errors.postTitle ? "true" : "false"}/>}
       />
+
+      {errors.postTitle && errors.postTitle.type === "required" && (
+        // <span role="alert">Post title required.</span>
+        <Typography>Post title is required.</Typography>
+      )}
 
       {/*Description Input*/}
       <Controller
@@ -78,8 +82,14 @@ export default function CreatePostForm({userEmail}) {
         defaultValue = ""
         className = {classes.input}
         rules = {{required: true}}
-        render = {({field}) => <TextField {...field} id = "postDesc" label = "Post Description" minRows = {3} maxRows = {4} multiline = {true}/>}
+        render = {({field}) => <TextField {...field} id = "postDesc" label = "Post Description" minRows = {3} maxRows = {4} multiline = {true} aria-invalid={errors.postDesc ? "true" : "false"}/>}
       />
+
+      {errors.postDesc && errors.postDesc.type === "required" && (
+        // <span role="alert">Post description required.</span>
+        <Typography>Post description is required.</Typography>
+      )}
+
       <input {...register('postFile')} type = "file" name = "postFile" accept = "image/*"/>   
 
       {/*Submit form*/}

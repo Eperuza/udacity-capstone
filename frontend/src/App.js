@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CreatePostForm from './pages/CreatePostForm';
 import {Switch, Route} from 'react-router-dom'
+import EditPostForm from './pages/EditPostForm';
 
 export default function App() {
   const {isAuthenticated, user} = useAuth0();
@@ -25,8 +26,10 @@ export default function App() {
           <CreatePostForm userEmail = {user.email}/>
         </Route>
 
-        <Route exact path = "/editPost">
-          <p>Edit Post component</p>
+        <Route path = '/editPost/:id' component = {({match}) => (
+          <EditPostForm match = {match}/>
+        )}
+        >
         </Route>
       </Switch>
       )
