@@ -26,8 +26,8 @@ export const getSpecificPost = async (id, callback) => {
 export const createPost = (file, userEmail, formData) => {
 
   const config = {
-    bucketName: 'udacity-sales',
-    region: 'us-east-2',
+    bucketName: process.env.REACT_APP_S3_NAME,
+    region: process.env.REACT_APP_S3_REGION,
     accessKeyId: process.env.REACT_APP_AWS_ACCESSKEY,
     secretAccessKey: process.env.REACT_APP_AWS_SECRETKEY,
   }
@@ -61,8 +61,8 @@ export const deletePost = (post) => {
   .then(data => console.log(data))
   .then(()=> {
     const config = {
-      bucketName: 'udacity-sales',
-      region: 'us-east-2',
+      bucketName: process.env.REACT_APP_S3_NAME,
+      region: process.env.REACT_APP_S3_REGION,
       accessKeyId: process.env.REACT_APP_AWS_ACCESSKEY,
       secretAccessKey: process.env.REACT_APP_AWS_SECRETKEY,
     }

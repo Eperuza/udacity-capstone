@@ -40,13 +40,13 @@ export default function Feed({userEmail}) {
 
   return (
     <div className = {classes.feed}>
-      <h1>My feed</h1>
+      <h1>My Feed</h1>
       {loading 
       //implement a load spinner eventually
       ? <p>Loading Feed...</p>
       :
         //with the post objects retrieved, render the post components, if empty, indicate no posts
-        posts.length > 0 ?
+        (posts && posts.length > 0) ?
         posts.map( post => {
           return <Post key = {post.id} post = {post} setPosts = {setPosts} posts = {posts}/>
         })
