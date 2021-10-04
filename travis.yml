@@ -1,0 +1,15 @@
+language: 
+  -node_js
+  
+services:
+  - docker
+
+script:
+  - docker-compose -f docker-compose-build.yaml build
+  - docker tag capstone-frontend eperuza/capstone-frontend:v1
+  - docker tag capstone-backend eperuza/capstone-backend:v1
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push "$DOCKER_USERNAME"/capstone-frontend:v1
+  - docker push "$DOCKER_USERNAME"/capstone-backend:v1
