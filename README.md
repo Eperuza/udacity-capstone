@@ -10,4 +10,8 @@ authentication: Auth0
 react front end
 feed API
 s3 bucket to store items
-Amazon DB
+Amazon DB 
+
+how to install
+
+how to use
