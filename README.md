@@ -15,3 +15,4 @@ Amazon DB
 how to install
 
 how to use
+travis
