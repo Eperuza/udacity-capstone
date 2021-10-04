@@ -1,0 +1,24 @@
+version: "3"
+services:
+  frontend:
+    image: capstone-frontend
+    environment:
+      REACT_APP_AWS_ACCESSKEY: $REACT_APP_AWS_ACCESSKEY
+      REACT_APP_AWS_SECRETKEY: $REACT_APP_AWS_SECRETKEY
+      REACT_APP_S3_NAME: $REACT_APP_S3_NAME
+      REACT_APP_S3_REGION: $REACT_APP_S3_REGION
+      REACT_APP_API_URL: "http://localhost:8080/feed"
+    ports: 
+      - 3000:3000
+  backend:
+    image: capstone-backend
+    environment:
+      PORT: 8080
+      ENVIRONMENT: staging
+      DB_HOST: udacity-capstone.c5jrazr64k3b.us-east-2.rds.amazonaws.com
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB: sales
+    ports:
+      - 8080:8080
+
