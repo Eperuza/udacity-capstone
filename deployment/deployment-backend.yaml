@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: backend
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: backend
+  template:
+    metadata:
+      labels:
+        service: backend
+        api: external
+    spec:
+      containers:
+        - image: eperuza/capstone-backend:v1
+          name: backend
+          imagePullPolicy: Always
+          env:
+          - name: DB_HOST
+            valueFrom: 
+              configMapKeyRef:
+                name: env-config
+                key: DB_HOST
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: PORT
+          - name: DB
+            valueFrom: 
+              configMapKeyRef:
+                name: env-config
+                key: DB
+          - name: ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: ENVIRONMENT
+          - name: DB_USER
+            valueFrom: 
+              secretKeyRef:
+                name: env-secret
+                key: DB_USER
+          - name: DB_PASSWORD
+            valueFrom: 
+              secretKeyRef:
+                name: env-secret
+                key: DB_PASSWORD
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+      restartPolicy: Always
