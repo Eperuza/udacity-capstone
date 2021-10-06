@@ -103,6 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
+#script 
 set_env.sh
+
+#deployment
 aws-secret.yaml
 env-secret.yaml
