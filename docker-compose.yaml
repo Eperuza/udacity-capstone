@@ -14,11 +14,11 @@ services:
     image: capstone-backend
     environment:
       PORT: 8080
-      ENVIRONMENT: staging
-      DB_HOST: udacity-capstone.c5jrazr64k3b.us-east-2.rds.amazonaws.com
-      DB_USER: postgres
-      DB_PASSWORD: password
-      DB: sales
+      ENVIRONMENT: $ENVIRONMENT
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB: $DB
     ports:
       - 8080:8080
 

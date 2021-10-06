@@ -110,6 +110,7 @@ export default function Post({post, setPosts, posts}) {
         </div>
       </Grid>
       
+      {/*Delete confirmation dialog box*/}
       <Dialog
         open={open}
         onClose={handleClose}

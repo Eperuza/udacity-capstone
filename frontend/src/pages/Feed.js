@@ -25,13 +25,7 @@ export default function Feed({userEmail}) {
     await getPosts(userEmail, setPosts)
     setLoading(false)
   }
-  //this worked, before correcting
-  // useEffect(async () => {
-  //   await getPosts(userEmail, setPosts)
-  //   setLoading(false)
-  // }, []);
 
-  //this cleared console errors
   useEffect(() => {
     loadFeed(userEmail, setPosts)
   }, [userEmail]);

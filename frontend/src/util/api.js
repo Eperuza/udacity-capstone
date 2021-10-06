@@ -22,7 +22,7 @@ export const getSpecificPost = async (id, callback) => {
   })
 }
 
-
+//create post and upload image to S3
 export const createPost = (file, userEmail, formData) => {
 
   const config = {
@@ -46,6 +46,7 @@ export const createPost = (file, userEmail, formData) => {
     .catch(err => console.error(err))
 }
 
+//create post without an image upload to S3
 export const createPostNoImg = (formData, userEmail) => {
   axios.post(apiUrl, {
     title: formData.postTitle, 
@@ -56,6 +57,7 @@ export const createPostNoImg = (formData, userEmail) => {
   .catch(err => console.error(err))
 }
 
+//delete post and remove the image from S3 if it had one.
 export const deletePost = (post) => {
   axios.delete(`${apiUrl}/${post.id}`)
   .then(data => console.log(data))
