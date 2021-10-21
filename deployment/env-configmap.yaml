@@ -7,7 +7,7 @@ data:
   DB: sales
   REACT_APP_S3_REGION: us-east-2
   REACT_APP_S3_NAME: udacity-sales
-  REACT_APP_API_URL: http://adc07287251064f8287de116372be054-1277679628.us-east-2.elb.amazonaws.com:8080/feed
+  REACT_APP_API_URL: http://a5c34d3f8aec3482abffdf05205bacd6-1239551612.us-east-2.elb.amazonaws.com:8080
   PORT: '8080'
   ENVIRONMENT: staging
 
