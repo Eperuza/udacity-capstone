@@ -7,7 +7,7 @@ services:
       REACT_APP_AWS_SECRETKEY: $REACT_APP_AWS_SECRETKEY
       REACT_APP_S3_NAME: $REACT_APP_S3_NAME
       REACT_APP_S3_REGION: $REACT_APP_S3_REGION
-      REACT_APP_API_URL: "http://localhost:8080/feed"
+      REACT_APP_API_URL: $REACT_APP_API_URL
     ports: 
       - 3000:3000
   backend:

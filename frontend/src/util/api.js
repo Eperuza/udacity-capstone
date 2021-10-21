@@ -5,7 +5,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 
 export const getPosts = async (userEmail, callback) => {
-  await axios.get(`${apiUrl}/?user=${userEmail}`)
+  await axios.get(`${apiUrl}/feed/?user=${userEmail}`)
   .then(res => callback(res.data))
   .catch(err => {
     console.log(userEmail)
@@ -14,7 +14,7 @@ export const getPosts = async (userEmail, callback) => {
 }
 
 export const getSpecificPost = async (id, callback) => {
-  await axios.get(`${apiUrl}/${id}`)
+  await axios.get(`${apiUrl}/feed/${id}`)
   .then(res => callback(res.data[0]))
   .catch(err => {
     console.log(id)
@@ -36,31 +36,31 @@ export const createPost = (file, userEmail, formData) => {
   
   ReactS3Client
     .uploadFile(file, newFileName)
-    .then(data => axios.post(apiUrl, {
+    .then(data => axios.post(`${apiUrl}/feed`, {
       title: formData.postTitle, 
       description: formData.postDesc, 
       user_email: userEmail, 
       image_url: data.location
     }))
-    .then(res => console.log(res))
+    // .then(res => console.log(res))
     .catch(err => console.error(err))
 }
 
 //create post without an image upload to S3
 export const createPostNoImg = (formData, userEmail) => {
-  axios.post(apiUrl, {
+  axios.post(`${apiUrl}/feed`, {
     title: formData.postTitle, 
     description: formData.postDesc, 
     user_email: userEmail
   })
-  .then(data => console.log(data))
+  // .then(data => console.log(data))
   .catch(err => console.error(err))
 }
 
 //delete post and remove the image from S3 if it had one.
 export const deletePost = (post) => {
-  axios.delete(`${apiUrl}/${post.id}`)
-  .then(data => console.log(data))
+  axios.delete(`${apiUrl}/feed/${post.id}`)
+  // .then(data => console.log(data))
   .then(()=> {
     const config = {
       bucketName: process.env.REACT_APP_S3_NAME,
@@ -72,7 +72,7 @@ export const deletePost = (post) => {
     if(post.image_url){
       const fileName = getFileName(post.image_url);
       ReactS3Client.deleteFile(fileName)
-      .then(res => console.log(res))
+      // .then(res => console.log(res))
       .catch(err => console.error(err))
     }
   })
@@ -80,10 +80,10 @@ export const deletePost = (post) => {
 }
 
 export const editPost = (id, formData) => {
-  axios.put(`${apiUrl}/${id}`, {
+  axios.put(`${apiUrl}/feed/${id}`, {
     title: formData.postTitle, 
     description: formData.postDesc,
   })
-  .then(data => console.log(data))
+  // .then(data => console.log(data))
   .catch(err => console.error(err))
 }

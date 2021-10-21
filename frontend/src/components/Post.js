@@ -57,7 +57,6 @@ export default function Post({post, setPosts, posts}) {
     await deletePost(post);
     const postRemove = posts.find(item => item.id === post.id)
     setPosts(posts.filter(post => post.id !== postRemove.id))
-    console.log(post)
   }
 
   //dialog state management
